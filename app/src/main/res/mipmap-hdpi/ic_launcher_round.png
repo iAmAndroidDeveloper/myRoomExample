@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="Nexus 7" />
+        <device id="Nexus 7 2013" />
+        <device id="pixel_3_xl" />
+        <device id="pixel_2_xl" />
+        <device id="pixel" />
+        <device id="Nexus 10" />
+        <device id="Nexus 9" />
+        <device id="Nexus 6P" />
+        <device id="pixel_2" />
+        <device id="pixel_c" />
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d371ff33-9eda-4b2f-b5bb-ea0f248516e2" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="192.168.1.24:5555" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="laserDotApp" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="laserDotApp" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/IndoorShootActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1045">
+              <caret line="1130" column="17" selection-start-line="1130" selection-start-column="17" selection-end-line="1130" selection-end-column="17" />
+              <folding>
+                <element signature="e#34668#34669#0" expanded="true" />
+                <element signature="e#34740#34741#0" expanded="true" />
+                <element signature="e#35801#35802#0" expanded="true" />
+                <element signature="e#35873#35874#0" expanded="true" />
+                <element signature="e#44250#44251#0" expanded="true" />
+                <element signature="e#44329#44330#0" expanded="true" />
+                <element signature="e#63332#63333#0" expanded="true" />
+                <element signature="e#72019#72020#0" expanded="true" />
+                <element signature="e#72118#72119#0" expanded="true" />
+                <element signature="e#73238#73239#0" expanded="true" />
+                <element signature="e#73303#73304#0" expanded="true" />
+                <element signature="e#74915#74916#0" expanded="true" />
+                <element signature="e#75009#75010#0" expanded="true" />
+                <element signature="e#80242#80243#0" expanded="true" />
+                <element signature="e#80290#80291#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="resourceFile" />
+        <option value="valueResourceFile" />
+        <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>DETECT_RED_OBJECTS_ONLY</find>
+      <find>matOfPoint2f</find>
+      <find>star</find>
+      <find>Print hit</find>
+      <find>spec</find>
+      <find>moveable</find>
+      <find>getActivity()</find>
+      <find>logou</find>
+      <find>AdminDashBoard</find>
+      <find>userId</find>
+      <find>store</find>
+      <find>timeStamp</find>
+      <find>G</find>
+      <find>glide</find>
+      <find>SharedPreferencesMain</find>
+      <find>tankFacingType</find>
+      <find>start</find>
+      <find>fire</find>
+      <find>user</find>
+      <find>firel</find>
+      <find>movingDirection</find>
+      <find>geta</find>
+      <find>OpenCV</find>
+      <find>windStageId</find>
+      <find>stageWithAir</find>
+      <find>see</find>
+      <find>btn_start_game</find>
+      <find

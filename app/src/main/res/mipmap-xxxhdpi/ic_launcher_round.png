@@ -1,0 +1,368 @@
+package com.example.laserdotfinalapptab;
+
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Base64;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.laserdotfinalapptab.ApiCall.BaseRefresh;
+import com.example.laserdotfinalapptab.adapter.FireLogsRepeatAdapter;
+import com.example.laserdotfinalapptab.base.BaseActivity;
+import com.example.laserdotfinalapptab.extra.LandingActivity;
+import com.example.laserdotfinalapptab.realmdatabase.Ammo;
+import com.example.laserdotfinalapptab.realmdatabase.COI;
+import com.example.laserdotfinalapptab.realmdatabase.Correction;
+import com.example.laserdotfinalapptab.realmdatabase.DET;
+import com.example.laserdotfinalapptab.realmdatabase.Firelogs;
+import com.example.laserdotfinalapptab.realmdatabase.Rank;
+import com.example.laserdotfinalapptab.realmdatabase.SubTarget;
+import com.example.laserdotfinalapptab.realmdatabase.TargetBackground;
+import com.example.laserdotfinalapptab.realmdatabase.Targets;
+import com.example.laserdotfinalapptab.realmdatabase.Users;
+import com.example.laserdotfinalapptab.realmdatabase.WindStage;
+import com.example.laserdotfinalapptab.realmdatabase.db.RealmQuery;
+import com.example.laserdotfinalapptab.sharedprefferece.SharedPreferencesMain;
+import com.example.laserdotfinalapptab.target.BulletHole;
+import com.example.laserdotfinalapptab.target.GameSpaceCalculator;
+import com.example.laserdotfinalapptab.utils.ImageEncodeDecode;
+import com.example.laserdotfinalapptab.utils.TranslateAnim;
+import com.example.laserdotfinalapptab.zoom.Zoomcameraview;
+import com.socks.library.KLog;
+
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+
+import static org.opencv.imgproc.Imgproc.RETR_EXTERNAL;
+import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
+import static org.opencv.imgproc.Imgproc.boundingRect;
+import static org.opencv.imgproc.Imgproc.contourArea;
+import static org.opencv.imgproc.Imgproc.moments;
+import static org.opencv.imgproc.Imgproc.threshold;
+
+public class IndoorShootActivity extends BaseActivity implements CameraBridgeViewBase.CvCameraViewListener2,
+        GameSpaceCalculator, TempSelection, BaseRefresh {
+
+    static final int VALFORTOPMOVE = 40;
+    ProgressDialog mProgressBar;
+    private boolean playBGsound;
+    static int i;
+
+    String timeStamp;
+    // private RecyclerView rcv_for_hits_miss;
+    private FireLogsRepeatAdapter repeatAdapter;
+
+    private static final String TAG = "Touch";
+    int seconForWait = 3000, secondForMoveTarget = 10000;
+    int pointMove = 0;
+    String windStageTage;
+    TranslateAnim anim;
+    private CheckBox chkBackBlast;
+
+    /*display data*/
+    private ImageView img_amry_avtar, img_chnage_user, loadFlag;
+    private TextView tv_soldier_name, tv_armynumber, tv_company, tv_rank,
+            tv_range, tv_ammo_name, tv_wind_stage, tv_wind_direction, tv_target_main,
+            btn_add_correction, tv_sub_target, tv_firemode, tv_daynight;
+
+    //Get data from lastActivity
+    private String selectionName, selection, armydetno, fireround, rangforfire, ammoMaxRange, stageWithAir,
+            targetType, hitmiss, defaultTrainingMode, movingDirection, tankFacingType;
+    private int ammoID, windStageId, targetID, subTargetID, targetBackgroundID;
+    private TextView tv_counter, tv_hit_miss_lable, tv_hit_miss_lable_last;
+
+
+    boolean zoom = false, user;
+    ImageView image, img_goto_projection, img_goto_cameraview, background_main_display, sound_manage;
+
+    /*Detect shotted spots*/
+    private BulletHole bulletHole;
+
+    /*Zoom */
+    Zoomcameraview zoomcameraview;
+    private Button btn_exit_cancel, btn_start_game, btn_finish_game, btn_fire_again;
+    FrameLayout layout_before_start, frame_for_shooting;
+    LinearLayout layout_after_complete, layout_top, llForCheckBlast;
+    RelativeLayout layout_photo_and_other;
+    // private CameraBridgeViewBase zoomcameraview;
+
+    private Toast toast;
+
+    private OverlayView overlayView;
+    //   Mat ImageMat;
+
+    private boolean DETECT_RED_OBJECTS_ONLY = true;
+
+  /*  private static final Scalar HSV_LOW_GREEN1 = new Scalar(29, 86, 6);
+
+    private static final Scalar HSV_LOW_GREEN2 = new Scalar(40, 100, 100);
+
+    private static final Scalar HSV_HIGH_GREEN1 = new Scalar(64, 255, 255);
+
+    private static final Scalar HSV_HIGH_GREEN2 = new Scalar(86, 255, 255);*/
+
+
+    //Red range
+    private static final Scalar HSV_LOW_RED1 = new Scalar(0, 100, 100);
+
+    private static final Scalar HSV_LOW_RED2 = new Scalar(10, 255, 255);
+
+    private static final Scalar HSV_HIGH_RED1 = new Scalar(160, 100, 100);
+
+    private static final Scalar HSV_HIGH_RED2 = new Scalar(179, 255, 255);
+
+    private static final Scalar RGB_RED = new Scalar(255, 0, 0);
+
+   /* private static final Scalar HSV_LOW_RED1 = new Scalar(110,150,150);
+
+    private static final Scalar HSV_LOW_RED2 = new Scalar(130,255,255);
+
+    private static final Scalar HSV_HIGH_RED1 = new Scalar(110,150,150);
+
+    private static final Scalar HSV_HIGH_RED2 = new Scalar(130,255,255);
+
+    private static final Scalar RGB_RED = new Scalar(0, 0, 255);*/
+
+
+    private static final int FRAME_SIZE_WIDTH = 2560;
+
+    private static final int FRAME_SIZE_HEIGHT = 1600;
+
+    private static final boolean FIXED_FRAME_SIZE = true;
+
+    private static final boolean DISPLAY_IMAGES = false;
+
+    private Mat bw;
+
+    private Mat hsv;
+
+    private Mat lowerRedRange;
+
+    private Mat upperRedRange;
+
+    private Mat downscaled;
+
+    private Mat upscaled;
+
+    List<MatOfPoint> contours;
+    MatOfPoint cntdetect;
+
+    private Mat contourImage;
+
+    List<Point> listOfPoints;
+    List<MatOfPoint> contours2_For_target;
+    String hitmissLabel = "nono";
+    int x = 0;
+    int y = 0;
+
+    double contourArea = 0;
+    //Frame size
+    Mat gray;
+    Mat dst;
+    Mat ImageMat;
+    private ActivityManager activityManager;
+    MatOfPoint2f matOfPoint2f;
+
+    private ActivityManager.MemoryInfo mi;
+
+    private Mat hierarchyOutputVector;
+    private MatOfPoint2f approxCurve;
+
+    ImageProcessing processing;
+
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS: {
+                    Log.i(TAG, "OpenCV loaded successfully");
+
+                    bw = new Mat();
+                    lowerRedRange = new Mat();
+                    upperRedRange = new Mat();
+                    downscaled = new Mat();
+                    upscaled = new Mat();
+                    contourImage = new Mat();
+                    listOfPoints = new ArrayList<>();
+                    contours2_For_target = new ArrayList<>();
+
+                    hierarchyOutputVector = new Mat();
+                    approxCurve = new MatOfPoint2f();
+
+                    zoomcameraview.enableView();
+                }
+                break;
+                default: {
+                    super.onManagerConnected(status);
+                }
+                break;
+            }
+        }
+    };
+
+    public IndoorShootActivity() {
+        Log.i(TAG, "Instantiated new " + this.getClass());
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "called onCreate");
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_home_screen);
+        i = 0;
+        playBGsound = true;
+
+        mProgressBar = new ProgressDialog(this);
+        mProgressBar.setCancelable(false);
+        mProgressBar.setMessage("Please wait while setting up shooting points...");
+        mProgressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        showProgressbar("show");
+
+
+        timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+        SharedPreferencesMain.setDefaults("fireLogTimeStamp", timeStamp, this);
+
+        initiliseFistAllData();
+        initialiseComponents();
+        onlyFirstTimeLoad(0);
+
+        if (rangforfire != null) {
+            if (ammoID != 0) {
+                Realm realm = Realm.getDefaultInstance();
+                Ammo ammo = realm.where(Ammo.class).equalTo(Ammo.AMMOID, ammoID).findFirst();
+                if (ammo != null) {
+                    //set ammo name here
+                    tv_ammo_name.setText(ammo.getAmmoName());
+                    float temp = (Float.parseFloat(rangforfire) / Float.parseFloat(ammo.getTravel_range()));
+                    seconForWait = Math.round(temp * 1000);
+                    //   KLog.e("range for ", "Fire range " + seconForWait + "  " + ammo.getTravel_range() + "  " + temp);
+
+
+                    if (Integer.parseInt(rangforfire) <= 50) {
+                     /* image.getLayoutParams().width = 400;
+                        image.getLayoutParams().height = 200;*/
+                        FrameLayout.LayoutParams layoutParams;
+                        if (tankFacingType.equalsIgnoreCase("side")) {
+                            layoutParams = new FrameLayout.LayoutParams(500, FrameLayout.LayoutParams.WRAP_CONTENT);
+                        } else {
+                            layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 200);
+                        }
+                        layoutParams.gravity = Gravity.CENTER;
+                        image.setLayoutParams(layoutParams);
+
+                    } else if (Integer.parseInt(rangforfire) <= 100) {
+                      /*  image.getLayoutParams().width = 250;
+                        image.getLayoutParams().height = 100;*/
+
+                        FrameLayout.LayoutParams layoutParams;
+                        if (tankFacingType.equalsIgnoreCase("side")) {
+                            layoutParams = new FrameLayout.LayoutParams(470, FrameLayout.LayoutParams.WRAP_CONTENT);
+                        } else {
+                            layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 170);
+                        }
+                        layoutParams.gravity = Gravity.CENTER;
+                        image.setLayoutParams(layoutParams);
+                    } else if (Integer.parseInt(rangforfire) <= 150) {
+                      /*  image.getLayoutParams().width = 100;
+                        image.getLayoutParams().height = 50;*/
+
+                        FrameLayout.LayoutParams layoutParams;
+                        if (tankFacingType.equalsIgnoreCase("side")) {
+                            layoutParams = new FrameLayout.LayoutParams(440, FrameLayout.LayoutParams.WRAP_CONTENT);
+                        } else {
+                            layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 150);
+                        }
+
+                        layoutParams.gravity = Gravity.CENTER;
+                        image.setLayoutParams(layoutParams);
+                    } else if (Integer.parseInt(rangforfire) <= 200) {
+                      /*  image.getLayoutParams().width = 100;
+                        image.getLayoutParams().height = 50;*/
+                        FrameLayout.LayoutParams layoutParams;
+                        if (tankFacingType.equalsIgnoreCase("side")) {
+                            layoutParams = new FrameLayout.LayoutParams(410, FrameLayout.LayoutParams.WRAP_CONTENT);
+                        } else {
+                            layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 130);
+                        }
+
+                        layoutParams.gravity = Gravity.CENTER;
+                        image.setLayoutParams(layoutParams);
+                    } else if (Integer.parseInt(rangforfire) <= 250) {
+                      /*  image.getLayoutParams().width = 100;
+                        image.getLayoutParams().height = 50;*/
+                        FrameLayout.LayoutParams layoutParams;
+                        if (tankFacingType.equalsIgnoreCase("side")) {
+                            layoutParams = new FrameLayout.LayoutParams(380, FrameLayout.LayoutParams.WRAP_CONTENT);
+                        } else {
+                            layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 110);
+                        }
+
+                        layoutParams.gravity = Gravity.CENTER;
+                        image.setLayoutParams(layoutParams);
+                    } else if (Integer.parseInt(rangforfire) <= 300) {
+                      /*  image.getLayoutParams().width = 100;
+                        image.getLayoutParams().height = 50;*/
+
+                        FrameLayout.LayoutParams layoutParams;
+                        if (tankFacingType.equalsIgnoreCase("side")) {
+          

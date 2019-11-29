@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="Nexus 7" />
+        <device id="Nexus 7 2013" />
+        <device id="pixel_3_xl" />
+        <device id="pixel_2_xl" />
+        <device id="pixel" />
+        <device id="Nexus 10" />
+        <device id="Nexus 9" />
+        <device id="Nexus 6P" />
+        <device id="pixel_2" />
+        <device id="pixel_c" />
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d371ff33-9eda-4b2f-b5bb-ea0f248516e2" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="192.168.1.24:5555" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="laserDotApp" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="laserDotApp" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/IndoorShootActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="1187" column="61" selection-start-line="1187" selection-start-column="48" selection-end-line="1187" selection-end-column="61" />
+              <folding>
+                <element signature="e#34668#34669#0" expanded="true" />
+                <element signature="e#34740#34741#0" expanded="true" />
+                <element signature="e#35801#35802#0" expanded="true" />
+                <element signature="e#35873#35874#0" expanded="true" />
+                <element signature="e#44250#44251#0" expanded="true" />
+                <element signature="e#44329#44330#0" expanded="true" />
+                <element signature="e#64002#64003#0" expanded="true" />
+                <element signature="e#72019#72020#0" expanded="true" />
+                <element signature="e#72118#72119#0" expanded="true" />
+                <element signature="e#73238#73239#0" expanded="true" />
+                <element signature="e#73303#73304#0" expanded="true" />
+                <element signature="e#75585#75586#0" expanded="true" />
+                <element signature="e#75679#75680#0" expanded="true" />
+                <element signature="e#80242#80243#0" expanded="true" />
+                <element signature="e#80290#80291#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="resourceFile" />
+        <option value="valueResourceFile" />
+        <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>DETECT_RED_OBJECTS_ONLY</find>
+      <find>matOfPoint2f</find>
+      <find>star</find>
+      <find>Print hit</find>
+      <find>spec</find>
+      <find>moveable</find>
+      <find>getActivity()</find>
+      <find>logou</find>
+      <find>AdminDashBoard</find>
+      <find>userId</find>
+      <find>store</find>
+      <find>timeStamp</find>
+      <find>G</find>
+      <find>glide</find>
+      <find>SharedPreferencesMain</find>
+      <find>tankFacingType</find>
+      <find>start</find>
+      <find>fire</find>
+      <find>user</find>
+      <find>firel</find>
+      <find>movingDirection</find>
+      <find>geta</find>
+      <find>OpenCV</find>
+      <find>windStageId</find>
+      <find>stageWithAir</find>
+      <find>see</find>
+      <find>btn_start_game</find>
+      <find>flage</find>
+      <find>targetTxt</find>
+      <find>target</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>fireround</replace>
+      <replace>OutDoorShootingActivity</replace>
+      <replace>windStageTage</replace>
+      <replace>windSound</replace>
+      <replace>backgroundSound</replace>
+      <replace>,</replace>
+      <replace>AdminDashBoard.this</replace>
+      <replace>SplashScreen</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>E:\android_vaqib\laserDotAppold\backup_15_5_19\laserDotApp\app</dir>
+    </dirStrings>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="E:\android_vaqib\laserDotAppold\backup_15_5_19\laserDotApp\key\armyfinalkey.jks" />
+    <option name="KEY_ALIAS" value="armyfinalkey" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/utils/TranslateAnim.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/exportimport/ExportFireLogs.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/admin/UserDetailsFragments.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/realmdatabase/db/RealmQuery.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/extra/SelectArmyNoDETActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/adapter/AmmunationTypeAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/target/BulletHole.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_admin_login.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_admin_login.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_select_wind_stage.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/extra/SelectWindStage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/zoom/Zoomcameraview.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/admin/AddEditUserActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_admin_dash_board.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/admin/sync/SyncRequest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/admin/sync/NetworkCheck.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/admin/sync/SuccessFailure.java" />
+        <option value="$PROJECT_DIR$/openCVLibrary/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/ApiCall/ApiService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/realmdatabase/Users.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_choose_target.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/realmdatabase/SubTarget.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/adapter/ChooseTargetAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/extra/ChooseTarget.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_user_full_view.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_full_view.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalapptab/admin/adapter/FireLogsListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialogue_select_speed_of_tank.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/laserdotfinalappt
